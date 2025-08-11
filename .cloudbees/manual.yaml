@@ -12,7 +12,7 @@ jobs:
   custom:
     delegates: rajnish-cloudbees/test-integration/.cloudbees/custom.yaml
     with:
-      param1: "asdf"
+      param1: "testing param"
     timeout-minutes: 30
 
   build:

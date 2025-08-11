@@ -1,12 +1,12 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: CustomJob
-name: simple custom job
-description: Custom job demo
+name: custom-job-for-testing
+description: Custom job for testing call-url and token
 
 
 inputs:
   param1:
-    description: Param One
+    description: testing parameter
     required: false
 
 outputs:
@@ -20,28 +20,8 @@ handlers:
     uses: docker://nginxinc/nginx-unprivileged:latest
     command: /bin/sh
     args: |
-      -c "
-      echo "00000000000000000000000000"
-      chmod 0766 /cloudbees/cluster-token
-      ls -l /cloudbees
-      echo "00000000000000000000000000"
-      echo "sample-result" > $CLOUDBEES_OUTPUTS/result;
-      echo "hello" > /cloudbees/idtoken/token
-      cat /cloudbees/idtoken/token
-      echo "===================="
-      cat /cloudbees/cluster-token/token
-      echo "===================="
-      echo \"Param1: $PARAM1\"
-      echo \"URL: $URL\"
-      echo \"callbak: ${{callback.url}}\"   
+      -c "  
       echo \"json: ${{toJSON(callback)}}\"
-      
-      echo -n "hello" | cloudbees mask
-      # rm /cloudbees/protected/bin/cloudbees
-      echo -n "world" | cloudbees mask
-      echo  "hello world"
-      
-      
       "
   callback:
     uses: docker://golang:1.20.3-alpine3.17
