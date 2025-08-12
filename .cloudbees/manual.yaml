@@ -7,19 +7,19 @@ on:
     branches:
       - "**"
   workflow_dispatch:
-
+      
 jobs:
-  custom:
-    delegates: rajnish-cloudbees/test-integration/.cloudbees/custom.yaml
-    with:
-      param1: "testing param"
-    timeout-minutes: 30
-
-  build:
-    needs: custom
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          echo "hello world ${{ needs.custom.outputs.result }}"
+    custom:
+        delegates: rajnish-cloudbees/test-integration/.cloudbees/custom.yaml
+        with:
+            param1: "asdf"
+        timeout-minutes: 30
+        
+    build:
+      needs: custom
+      steps:
+        - name: Say hello
+          uses: docker://golang:1.20.3-alpine3.17
+          shell: sh
+          run: |
+            echo "hello world ${{ needs.custom.outputs.result }}"
