@@ -1,0 +1,15 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: hello-action
+inputs:
+  arg-1:
+    description: "argument 1"
+
+runs:
+  using: composite
+  steps:
+    - id: action-step
+      uses: docker://alpine:3.17
+      shell: sh
+      run: |
+        echo "Hello from action. I am ${{ inputs.arg-1 }}"
