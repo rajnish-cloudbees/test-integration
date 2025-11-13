@@ -9,10 +9,10 @@ inputs:
     description: testing parameter
     required: false
 
-#outputs:
-#  result:
-#    description: Final status of the job
-#    value: ${{ handlers.init.outputs.result }}
+outputs:
+  result:
+    description: Final status of the job
+    value: ${{ handlers.init.outputs.result }}
 
 
 handlers:
@@ -20,9 +20,7 @@ handlers:
     uses: docker://nginxinc/nginx-unprivileged:latest
     command: /bin/sh
     args: |
-      -c "  
-      echo \"json: ${{toJSON(callback)}}\"
-      "
+      -c " echo \"json: ${{toJSON(callback)}}\"; echo \"Hi from custom job\" >> $CLOUDBEES_OUTPUTS/result"
   callback:
     uses: docker://golang:1.20.3-alpine3.17
     command: /bin/sh
