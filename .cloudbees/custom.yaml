@@ -9,10 +9,10 @@ inputs:
     description: testing parameter
     required: false
 
-outputs:
-  result:
-    description: Final status of the job
-    value: ${{ handlers.init.outputs.result }}
+#outputs:
+#  result:
+#    description: Final status of the job
+#    value: ${{ handlers.init.outputs.result }}
 
 
 handlers:
